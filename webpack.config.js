@@ -59,13 +59,44 @@ module.exports = env => ({
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js)$/,
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            plugins: [
+              ["import", {"libraryName": "antd", "style": "css"}],
+            ]
+          }
+        }],
+        exclude: [
+          /(node_modules|bower_components|unitTest)/,
+        ]
+      },
+      {
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: ['babel-loader']
       },
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              localIdentName: '[name]-[local]-[hash:base64:4]'
+            }
+          },
+          {
+            loader: "sass-loader"
+          }]
       },
       {
         test: /\.(png|jpg)$/i,
