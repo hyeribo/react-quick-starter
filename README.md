@@ -14,3 +14,6 @@ $ npm start
 - react-router-dom v4.3
 - styled-components v4.1
 - antd v3.15
+
+## Preview
+![](./src/assets/preview.png)
